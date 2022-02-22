@@ -1,6 +1,7 @@
-@import '@/css/spinner/vote-spinner.scss';
+@import '@/css/pages/home.scss';
+@import '@/css/components/index.scss';
 
-$BASE_FONT_SIZE: 16px;
+$BASE_FONT_SIZE: calc(10px + 2vmin);
 
 body {
   margin: 0;
@@ -10,5 +11,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   font-size: $BASE_FONT_SIZE;
-  text-align: center;
+  min-height: 100vh;
+
+  a {
+    text-decoration: none;
+    outline: none;
+  }
 }

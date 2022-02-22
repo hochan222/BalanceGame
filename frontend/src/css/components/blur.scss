@@ -1,0 +1,8 @@
+.blur {
+  height: fit-content;
+  min-height: 100vh;
+  background: rgba(255, 255, 255, 0.3);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}

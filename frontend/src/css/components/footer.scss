@@ -1,0 +1,27 @@
+$FOOTER_FONT_COLOR: #888888;
+
+.footer {
+  width: 100%;
+  margin: 1% 0;
+  padding: 1% 0;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: $FOOTER_FONT_COLOR;
+  font-size: 14px;
+  
+  border-top: 1px solid #cecece;
+
+  a {
+      cursor: pointer;
+      color: $FOOTER_FONT_COLOR;
+      transition: color 0.7s ease-out;
+  }
+
+  a:hover {
+      color: #551A8B;
+  }
+}

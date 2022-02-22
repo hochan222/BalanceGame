@@ -3,7 +3,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 
 import routes from '@/routes';
 import { PAGE_NOT_FOUND_URL } from './utils/urls';
-import Spinner from './components';
+import Spinner from '@/components/Spinner';
 
 const App = () => {
   return (
