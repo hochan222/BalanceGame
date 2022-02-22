@@ -1,0 +1,4 @@
+springdoc:
+  swagger-ui:
+    path: /swagger-ui-voteBoard.html
+    operationsSorter: method
