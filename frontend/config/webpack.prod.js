@@ -1,5 +1,3 @@
-
-   
 const { merge } = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -34,10 +32,10 @@ module.exports = () =>
     plugins: [
       new BundleAnalyzerPlugin({
         analyzerMode: 'static',
-        reportFilename: '../report/report.html',
+        reportFilename: './report/report.html',
         openAnalyzer: false,
         generateStatsFile: true,
-        statsFilename: '../report/stats.json',
+        statsFilename: './report/stats.json',
       }),
     ],
   });

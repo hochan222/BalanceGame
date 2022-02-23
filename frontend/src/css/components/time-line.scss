@@ -1,0 +1,23 @@
+.time-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  &__read-more {
+    font-size: 14px;
+    cursor: pointer;
+
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin: 5px;
+    margin-top: 10px;
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: background-color 2s;
+    -webkit-transition: background-color 0.5s;
+  }
+
+  &__read-more:hover {
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+}

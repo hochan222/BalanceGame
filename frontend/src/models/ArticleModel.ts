@@ -5,7 +5,9 @@ import HomeStore from '../stores/HomeStore';
 export interface IArticleData {
   id: number;
   title: string;
-  author: string;
+  content: string;
+  createdAt: string;
+  voteCount: number;
 }
 
 class ArticleModel {
@@ -15,7 +17,11 @@ class ArticleModel {
 
   title = '';
 
-  author = '';
+  content = '';
+
+  createdAt = '';
+
+  voteCount = 0;
 
   constructor(store: HomeStore, data: IArticleData) {
     makeObservable(this, {

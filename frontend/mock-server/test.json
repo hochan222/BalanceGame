@@ -1,9 +1,40 @@
 {
   "articles": [
-    { "id": 1, "title": "json-server", "author": "typicode" },
-    { "id": 2, "title": "json-server", "author": "typicode" },
-    { "id": 3, "title": "json-server", "author": "typicode" },
-    { "id": 4, "title": "json-server", "author": "typicode" }
+    {
+      "id": 1,
+      "title": "json-server vs mock-server",
+      "content": "가나다라 마바사 아자차카 가나다라 마바사 아자차 으라차차 가나다라마바사 가나다라마바사 가나다라마바사",
+      "createdAt": "2022.02.23 13:52",
+      "voteCount": 102
+    },
+    {
+      "id": 2,
+      "title": "Typescript vs Java",
+      "content": "가나다라 마바사 아자차카 가나다라 마바사 아자차 으라차차 가나다라마바사 가나다라마바사 가나다라마바사가나다라 마바사 아자차카 가나다라 마바사 아자차 으라차차 가나다라마바사 가나다라마바사 가나다라마바사가나다라 마바사 아자차카 가나다라 마바사 아자차 으라차차 가나다라마바사 가나다라마바사 가나다라마바사",
+      "createdAt": "2022.02.23 10:52",
+      "voteCount": 43
+    },
+    {
+      "id": 3,
+      "title": "json-server vs mock-server",
+      "content": "가나다라 마바사 아자차카 가나다라 마바사 아자차 으라차차",
+      "createdAt": "2022.02.23 09:52",
+      "voteCount": 105
+    },
+    {
+      "id": 4,
+      "title": "바다 vs 산",
+      "content": "가나다라 마바사 아자차카 가나다라 마바사 아자차 으라차차",
+      "createdAt": "2022.02.22 13:52",
+      "voteCount": 422
+    },
+    {
+      "id": 5,
+      "title": "바다 vs 산",
+      "content": "가나다라 마바사 아자차카 가나다라 마바사 아자차 으라차차",
+      "createdAt": "2022.02.21 13:52",
+      "voteCount": 422
+    }
   ],
   "comments": [{ "id": 1, "body": "some comment", "postId": 1 }],
   "profile": { "name": "typicode" }

@@ -15,7 +15,7 @@ module.exports = {
   },
   output: {
     filename: '[name].bundle.[contenthash].js',
-    path: path.resolve(__dirname, '../build'),
+    path: path.resolve(__dirname, '../../backend/src/main/resources'),
     publicPath: '/',
   },
   target: ['web', 'es5'],
