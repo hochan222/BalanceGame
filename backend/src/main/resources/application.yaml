@@ -3,6 +3,8 @@ springdoc:
     path: /swagger-ui-voteBoard.html
     operationsSorter: method
 spring:
+  profiles:
+    include: db
   jpa:
     show-sql: true
     properties:
