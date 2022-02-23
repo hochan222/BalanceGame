@@ -174,5 +174,5 @@ gradle-app.setting
 .classpath
 
 #application-db.yml
-backend/src/main/resources/application-db.yml
+backend/src/main/resources/application-db.yaml
 # End of https://www.toptal.com/developers/gitignore/api/java,gradle,intellij+all,macos
