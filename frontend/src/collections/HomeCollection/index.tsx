@@ -11,7 +11,7 @@ interface IHomeCollectionProps {}
 
 const HomeCollection = () => {
   const rootStore: RootStore = useContext(StoreContext) as RootStore;
-  const { homeStore: store, uiStore } = rootStore;
+  const { homeStore: store, uiStore, searchResultStore } = rootStore;
   const { timeLine } = store;
 
   const content = !rootStore.isLoading && timeLine.days.length > 0 ? <TimeLine timeLine={timeLine} /> : null;
@@ -19,7 +19,7 @@ const HomeCollection = () => {
   return (
     <>
       <BalanceGame />
-      <Search uiStore={uiStore} />
+      <Search store={searchResultStore} uiStore={uiStore} />
       {content}
     </>
   );

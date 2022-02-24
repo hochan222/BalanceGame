@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
 $SEARCH_BOX_WIDTH: 350px;
+$RESULT_SEARCH_BOX_WIDTH: 330px;
 
 $DROPDOWN_WIDTH: 120px;
 $DROPDOWN_ELEMENT_WIDTH: $DROPDOWN_WIDTH - 25px;
@@ -130,4 +131,18 @@ $SEARCH_COLOR: black;
 :-ms-input-placeholder {
   /* IE 10+ */
   color: $SEARCH_PLACEHOLDER_COLOR;
+}
+
+.search-result-wrapper {
+  margin: auto 10px;
+
+  & .search_box {
+    width: $RESULT_SEARCH_BOX_WIDTH;
+
+    & .search_field {
+      & .fas {
+        right: 3px;
+      }
+    }
+  }
 }

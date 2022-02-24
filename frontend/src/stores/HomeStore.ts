@@ -35,6 +35,8 @@ class HomeStore {
 
   *fetchArticles() {
     this.setIsLoading(true);
+    this.reset();
+
     try {
       const { data } = yield HomeRepository.getArticle();
       this.setArticles(data);
@@ -46,6 +48,14 @@ class HomeStore {
     }
 
     this.setIsLoading(false);
+  }
+
+  reset() {
+    const defaultCategory = this.rootStore.uiStore.categories[0] as string;
+
+    this.timeLine = { days: [], timeLine: {} };
+    this.rootStore.searchResultStore.searchKeyword = '';
+    this.rootStore.uiStore.setSelectedCategory(defaultCategory);
   }
 
   groupByDay(data: ArticleModel[]) {

@@ -9,6 +9,7 @@ import Footer from '@/components/Footer';
 import RootStore from '@/stores/RootStore';
 import StoreContext from '@/contexts/Store';
 import HomeCollection from '@/collections/HomeCollection';
+import Logo from '@/components/Logo';
 
 const Home = () => {
   const rootStore: RootStore = useContext(StoreContext) as RootStore;
@@ -31,8 +32,9 @@ const Home = () => {
   return (
     <Section className="home">
       <Blur>
-        <Header>
-          <Title text="11st Balance Game" />
+        <Header className="search-result-header">
+          <Logo />
+          <Title text="Balance Game" />
         </Header>
 
         <HomeCollection />

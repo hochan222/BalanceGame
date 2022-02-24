@@ -3,8 +3,9 @@ import { observer } from 'mobx-react-lite';
 import cx from 'classnames';
 
 import UIStore from '@/stores/UIStore';
+import SearchResultStore from '@/stores/SearchResultStore';
 
-const Search = ({ uiStore }: { uiStore: UIStore }) => {
+const Search = ({ uiStore, store, className }: { uiStore: UIStore; store: SearchResultStore; className?: string }) => {
   const {
     isHomeSearchDropDownActive,
     setIsHomeSearchDropDownActive,
@@ -12,6 +13,7 @@ const Search = ({ uiStore }: { uiStore: UIStore }) => {
     selectedCategory,
     setSelectedCategory,
   } = uiStore;
+  const { searchKeyword, setSearchKeyword } = store;
 
   const onClickDropDown = (e: React.MouseEvent<HTMLElement>) => {
     const currentTargetElement = e.currentTarget;
@@ -33,8 +35,26 @@ const Search = ({ uiStore }: { uiStore: UIStore }) => {
     setIsHomeSearchDropDownActive(false);
   };
 
+  const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchKeyword(e.target.value);
+  };
+
+  const enterSearchResultPage = () => {
+    document.location.href = `/searchResult?keyword=${searchKeyword}&category=${selectedCategory}`;
+  };
+
+  const onClickSearch = () => {
+    enterSearchResultPage();
+  };
+
+  const onKeyDownSearch = (e: React.KeyboardEvent<HTMLElement>) => {
+    if (e.key === 'Enter') {
+      enterSearchResultPage();
+    }
+  };
+
   return (
-    <div className="wrapper">
+    <div className={cx('wrapper', className)}>
       <div className="search_box">
         <div
           className="dropdown"
@@ -54,8 +74,15 @@ const Search = ({ uiStore }: { uiStore: UIStore }) => {
           </ul>
         </div>
         <div className="search_field">
-          <input type="text" className="input" placeholder="Search" />
-          <i className="fas fa-search" />
+          <input type="text" className="input" placeholder="Search" value={searchKeyword} onChange={onChangeSearch} />
+          <i
+            className="fas fa-search"
+            onClick={onClickSearch}
+            onKeyDown={onKeyDownSearch}
+            role="button"
+            tabIndex={0}
+            aria-label="search button"
+          />
         </div>
       </div>
     </div>

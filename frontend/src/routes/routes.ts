@@ -10,7 +10,8 @@ interface IcomponentByLabel {
 
 const componentByLabel: IcomponentByLabel = {
   홈: lazy(() => import('@/pages/Home')),
-  기사: lazy(() => import('@/pages/Article'))
+  기사: lazy(() => import('@/pages/Article')),
+  검색결과: lazy(() => import('@/pages/SearchResult')),
 };
 
 export const routes = paths.map(({ label, path }) => ({

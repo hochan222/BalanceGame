@@ -1,0 +1,20 @@
+@import './z-index.scss';
+
+.header {
+  position: sticky;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  // background: linear-gradient(#ffffffff, #fffffffa, #ffffffdd, #ffffffcc);
+  background: rgba(255, 255, 255, 0.6);
+  z-index: $HEADER_Z_INDEX;
+  box-shadow: 0px 3px 4px #00000020;
+}
+
+.search-result-header {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  height: 50px;
+}
