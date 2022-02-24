@@ -1,0 +1,7 @@
+{
+  "short_name": "해커톤",
+  "name": "해커톤",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#ffffff"
+}
