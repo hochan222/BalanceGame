@@ -2,23 +2,49 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 
 import HistoryList from '@/components/HistoryList';
+import api from '@/utils/api';
+import UIStore from '@/stores/UIStore';
+import HomeStore from '@/stores/HomeStore';
+import SearchResultStore from '@/stores/SearchResultStore';
 
 interface ITimeLineProps {
-  timeLine: {
-    days: string[];
-    timeLine: any;
-  };
+  uiStore: UIStore;
+  store: HomeStore | SearchResultStore;
 }
 
-const TimeLine = ({ timeLine }: ITimeLineProps) => {
+const TimeLine = ({ uiStore, store }: ITimeLineProps) => {
+  const { timeLine, lastOffset, setTimeLines, setLastOffset } = store;
+  const { isArticleReadMoreEnd, setIsArticleReadMoreEnd } = uiStore;
   const { days, timeLine: history } = timeLine;
+
+  const onClickReadMore = async () => {
+    const response = await api.get(`/articles?offset=${lastOffset}`);
+
+    setTimeLines(response.data.data);
+    const dataLength = response.data.data.length;
+    const articleLength = response.data.data.length - 1;
+    setLastOffset(response?.data?.data[articleLength]?.id || undefined);
+    if (dataLength === 0) {
+      setIsArticleReadMoreEnd(true);
+    }
+  };
 
   return (
     <section className="time-line">
       {days.map((day: string) => (
         <HistoryList key={day} articles={history[day]} day={day} />
       ))}
-      <div className="time-line__read-more">+ read more</div>
+      {!isArticleReadMoreEnd && (
+        <div
+          className="time-line__read-more"
+          onClick={onClickReadMore}
+          onKeyDown={onClickReadMore}
+          role="button"
+          tabIndex={0}
+        >
+          + read more
+        </div>
+      )}
     </section>
   );
 };

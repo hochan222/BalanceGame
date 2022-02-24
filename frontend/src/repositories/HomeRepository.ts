@@ -9,9 +9,12 @@ class HomeRepository {
     this.URL = url || this.URL;
   }
 
-  async getArticle() {
-    // const currentTime = new Date().getTime();
-    return Promise.all([API.get(`${this.URL}`), wait(SPINNER_API_WAITING_TIME)]);
+  async getArticle(query: string) {
+    return Promise.all([API.get(`${this.URL}?${query}`), wait(SPINNER_API_WAITING_TIME)]);
+  }
+
+  getArticleTest(query: string) {
+    return API.get(`${this.URL}?${query}`);
   }
 }
 

@@ -11,14 +11,18 @@ class UIStore {
 
   selectedCategory = '전체 보기';
 
+  isArticleReadMoreEnd = false;
+
   constructor(rootStore: RootStore) {
     makeObservable(this, {
       isHomeSearchDropDownActive: observable,
       categories: observable,
       selectedCategory: observable,
+      isArticleReadMoreEnd: observable,
       setIsHomeSearchDropDownActive: action.bound,
       setCategories: action.bound,
       setSelectedCategory: action.bound,
+      setIsArticleReadMoreEnd: action.bound,
     });
     this.rootStore = rootStore;
   }
@@ -33,6 +37,10 @@ class UIStore {
 
   setCategories(categories: string[]) {
     this.categories = categories;
+  }
+
+  setIsArticleReadMoreEnd(isArticleReadMoreEnd: boolean) {
+    this.isArticleReadMoreEnd = isArticleReadMoreEnd;
   }
 }
 

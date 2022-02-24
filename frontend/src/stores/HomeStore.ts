@@ -14,13 +14,18 @@ class HomeStore {
 
   public timeLine: { days: string[]; timeLine: {} } = { days: [], timeLine: {} };
 
+  public lastOffset: number = 6;
+
   constructor(rootStore: RootStore) {
     makeObservable(this, {
       isLoading: observable,
       articles: observable,
       timeLine: observable,
+      lastOffset: observable,
       fetchArticles: flow,
       setIsLoading: action,
+      setLastOffset: action.bound,
+      setTimeLines: action.bound,
     });
     this.rootStore = rootStore;
   }
@@ -33,13 +38,23 @@ class HomeStore {
     this.articles = articles.map((article: any) => new ArticleModel(this, article));
   }
 
+  setTimeLines(articles: any[]) {
+    this.timeLine = this.groupByDay(articles.map((article: any) => new ArticleModel(this, article)));
+  }
+
+  setLastOffset(lastOffset: number) {
+    this.lastOffset = lastOffset;
+  }
+
   async fetchArticles() {
     this.setIsLoading(true);
     this.reset();
 
     try {
-      const response = await HomeRepository.getArticle();
+      const response = await HomeRepository.getArticle('');
       this.setArticles(response[0].data.data);
+      const articleLength = response[0].data.data.length - 1;
+      this.setLastOffset(response[0]?.data?.data[articleLength]?.id || undefined);
       this.timeLine = this.groupByDay(this.articles);
     } catch (e) {
       // TODO: handle error
@@ -53,6 +68,7 @@ class HomeStore {
   reset() {
     const defaultCategory = this.rootStore.uiStore.categories[0] as string;
 
+    this.lastOffset = 6;
     this.timeLine = { days: [], timeLine: {} };
     this.rootStore.searchResultStore.searchKeyword = '';
     this.rootStore.uiStore.setSelectedCategory(defaultCategory);

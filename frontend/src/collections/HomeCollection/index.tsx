@@ -15,7 +15,8 @@ const HomeCollection = () => {
   const { homeStore: store, uiStore, searchResultStore } = rootStore;
   const { timeLine } = store;
 
-  const content = !rootStore.isLoading && timeLine.days.length > 0 ? <TimeLine timeLine={timeLine} /> : <Spinner />;
+  const content =
+    !rootStore.isLoading && timeLine.days.length > 0 ? <TimeLine store={store} uiStore={uiStore} /> : <Spinner />;
 
   return (
     <>

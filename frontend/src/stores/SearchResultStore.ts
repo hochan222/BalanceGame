@@ -26,15 +26,21 @@ class SearchResultStore {
     '전체 검색' : ''
   }
 
+  public lastOffset: number = 6;
+
   constructor(rootStore: RootStore) {
     makeObservable(this, {
       isLoading: observable,
       articles: observable,
       timeLine: observable,
       searchKeyword: observable,
+      lastOffset: observable,
       fetchArticles: flow,
       setIsLoading: action,
+      setArticles: action,
       setSearchKeyword: action.bound,
+      setLastOffset: action.bound,
+      setTimeLines: action.bound,
     });
     this.rootStore = rootStore;
   }
@@ -51,6 +57,15 @@ class SearchResultStore {
     this.searchKeyword = searchKeyword;
   }
 
+
+  setTimeLines(articles: any[]) {
+    this.timeLine = this.groupByDay(articles.map((article: any) => new ArticleModel(this, article)));
+  }
+
+  setLastOffset(lastOffset: number) {
+    this.lastOffset = lastOffset;
+  }
+  
   async fetchArticles({ keyword, category }: { keyword: string; category: string }) {
     this.setIsLoading(true);
     this.reset({ keyword, category });
@@ -59,8 +74,9 @@ class SearchResultStore {
 
     try {
       const response = await SearchResultRepository.getArticle(
-        `searchKeyword=${this.searchKeyword}&category=${categoryResult}&offset=6`,
+        `search=${this.searchKeyword}&category=${categoryResult}`,
       );
+      console.log('aa', response)
       this.setArticles(response[0].data.data);
       this.timeLine = this.groupByDay(this.articles);
     } catch (e) {
