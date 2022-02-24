@@ -42,17 +42,17 @@ class SearchResultStore {
     this.searchKeyword = searchKeyword;
   }
 
-  *fetchArticles({ keyword, category }: { keyword: string; category: string }) {
+  async fetchArticles({ keyword, category }: { keyword: string; category: string }) {
     this.setIsLoading(true);
     this.reset({ keyword, category });
 
     const { selectedCategory } = this.rootStore.uiStore;
 
     try {
-      const { data } = yield SearchResultRepository.getArticle(
+      const data = await SearchResultRepository.getArticle(
         `searchKeyword=${this.searchKeyword}&category=${selectedCategory}`,
       );
-      this.setArticles(data);
+      this.setArticles(data[0].data);
       this.timeLine = this.groupByDay(this.articles);
     } catch (e) {
       // TODO: handle error

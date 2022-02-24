@@ -1,4 +1,6 @@
 import API from '@/utils/api';
+import { SPINNER_API_WAITING_TIME } from '@/utils/constants';
+import { wait } from '@/utils/utils';
 
 class HomeRepository {
   URL = process.env.ENV === 'local' ? '/articles' : '/v1/articles';
@@ -7,8 +9,8 @@ class HomeRepository {
     this.URL = url || this.URL;
   }
 
-  getArticle(param: string) {
-    return API.get(`${this.URL}?${param}`);
+  async getArticle(param: string) {
+    return Promise.all([API.get(`${this.URL}?${param}`), wait(SPINNER_API_WAITING_TIME)]);
   }
 }
 

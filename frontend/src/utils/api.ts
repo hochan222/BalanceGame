@@ -11,4 +11,5 @@ export default axios.create({
   baseURL: `//${host}${port}`,
   headers: { 'content-type': 'application/x-www-form-urlencoded' },
   xsrfCookieName: '',
+  timeout: 5000,
 });

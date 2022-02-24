@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite';
 import StoreContext from '@/contexts/Store';
 import RootStore from '@/stores/RootStore';
 import TimeLine from '@/components/TimeLine';
+import Spinner from '@/components/Spinner';
 
 interface ISearchResultCollectionProps {}
 
@@ -12,7 +13,7 @@ const SearchResultCollection = () => {
   const { searchResultStore: store } = rootStore;
   const { timeLine } = store;
 
-  const content = !rootStore.isLoading && timeLine.days.length > 0 ? <TimeLine timeLine={timeLine} /> : null;
+  const content = !rootStore.isLoading && timeLine.days.length > 0 ? <TimeLine timeLine={timeLine} /> : <Spinner />;
 
   return content;
 };

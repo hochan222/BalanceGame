@@ -33,13 +33,13 @@ class HomeStore {
     this.articles = articles.map((article: IArticleData) => new ArticleModel(this, article));
   }
 
-  *fetchArticles() {
+  async fetchArticles() {
     this.setIsLoading(true);
     this.reset();
 
     try {
-      const { data } = yield HomeRepository.getArticle();
-      this.setArticles(data);
+      const data = await HomeRepository.getArticle();
+      this.setArticles(data[0].data);
       this.timeLine = this.groupByDay(this.articles);
     } catch (e) {
       // TODO: handle error

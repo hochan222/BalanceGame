@@ -1,5 +1,6 @@
 import { extendObservable, makeObservable } from 'mobx';
-// import { action, extendObservable, makeObservable, observable } from 'mobx';
+
+import SearchResultStore from '@/stores/SearchResultStore';
 import HomeStore from '../stores/HomeStore';
 
 export interface IArticleData {
@@ -11,7 +12,7 @@ export interface IArticleData {
 }
 
 class ArticleModel {
-  store: HomeStore;
+  store: HomeStore | SearchResultStore;
 
   id = 0;
 
@@ -24,10 +25,7 @@ class ArticleModel {
   voteCount = 0;
 
   constructor(store: HomeStore, data: IArticleData) {
-    makeObservable(this, {
-      // isHomeAppIconDragEnter: observable,
-      // setIsHomeAppIconDragEnter: action.bound,
-    });
+    makeObservable(this, {});
     extendObservable(this, data);
     this.store = store;
   }

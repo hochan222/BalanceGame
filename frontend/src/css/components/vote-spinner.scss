@@ -1,12 +1,5 @@
 @import './z-index.scss';
 
 .vote-spinner {
-  position: fixed;
-  // margin: 0px auto;
-  top: 10px;
-  left: 10px;
-  // left: 50%;
-  // top: 30%;
-  // transform: translate(-50%, 0);
-  z-index: $VOTE_SPINNER_Z_INDEX;
+  position: relative;
 }
