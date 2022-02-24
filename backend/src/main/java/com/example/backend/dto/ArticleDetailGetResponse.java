@@ -28,6 +28,10 @@ public class ArticleDetailGetResponse {
     private String leftItem;
     @ApiModelProperty(value = "오른쪽 투표 아이템", dataType = "String", required = true, example = "코들린")
     private String rightItem;
+    @ApiModelProperty(value = "게시글 왼쪽 투표수", dataType = "Long", required = true, example = "3")
+    private Long leftCount;
+    @ApiModelProperty(value = "게시글 오른쪽 투표수", dataType = "Long", required = true, example = "7")
+    private Long rightCount;
     @ApiModelProperty(value = "게시글 전체 투표수", dataType = "Long", required = true, example = "10")
     private Long totalCount;
     @ApiModelProperty(value = "게시글 등록일자", dataType = "String", required = true, example = "2022.02.22 14:30")
@@ -39,13 +43,15 @@ public class ArticleDetailGetResponse {
 
 
     public ArticleDetailGetResponse(Long id, ArticleCategoryDto articleCategoryDto, String title, String content,
-        String leftItem, String rightItem, Long totalCount, String createdAt,
+        String leftItem, String rightItem, Long leftCount, Long rightCount, Long totalCount, String createdAt,
         String modifiedAt, List<ArticleCommentDto> articleCommentDtos) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.leftItem = leftItem;
         this.rightItem = rightItem;
+        this.leftCount = leftCount;
+        this.rightCount = rightCount;
         this.totalCount = totalCount;
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
@@ -60,7 +66,8 @@ public class ArticleDetailGetResponse {
             .map(ArticleCommentDto::new).collect(Collectors.toList());
         return new ArticleDetailGetResponse(article.getId(), new ArticleCategoryDto(article.getArticleCategory()),
             article.getTitle(), article.getContent(), article.getLeftItem(), article.getRightItem(),
-            article.getTotalCount(), createdAt, modifiedAt, articleCommentDtos);
+            article.getLeftCount(), article.getRightCount(), article.getTotalCount(), createdAt, modifiedAt,
+            articleCommentDtos);
     }
 
 }
