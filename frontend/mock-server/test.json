@@ -1,16 +1,33 @@
 {
+  "article": {
+    "id": 2,
+    "title": "당신은 누구입니까?",
+    "content": "가나다라 마바사 아자차카 가나다라 마바사 아자차 으라차차 가나다라마바사 가나다라마바사 가나다라마바사가나다라 마바사 아자차카 가나다라 마바사 아자차 으라차차 가나다라마바사 가나다라마바사 가나다라마바사가나다라 마바사 아자차카 가나다라 마바사 아자차 으라차차 가나다라마바사 가나다라마바사 가나다라마바사",
+    "voteItem1": "박찬우",
+    "voteItem2": "이호찬",
+    "item1stat": 23,
+    "item2stat": 24,
+    "createdAt": "2022.02.23 10:52"
+  },
   "articles": [
     {
       "id": 1,
-      "title": "json-server vs mock-server",
-      "content": "가나다라 마바사 아자차카 가나다라 마바사 아자차 으라차차 가나다라마바사 가나다라마바사 가나다라마바사",
-      "createdAt": "2022.02.23 13:52",
-      "voteCount": 102
+      "title": "당신은 프론트엔드 개발자입니다 .당신은 누구입니까? 당신의 이름은 무엇인가요?",
+      "voteItem1": "박찬우",
+      "voteItem2": "이호찬",
+      "content": "둘 중 하나를 택하세요 안그러면 죽습니다.",
+      "item1stat": 23,
+      "item2stat": 24,
+      "createdAt": "2022-03-20 12:00"
     },
     {
       "id": 2,
       "title": "Typescript vs Java",
       "content": "가나다라 마바사 아자차카 가나다라 마바사 아자차 으라차차 가나다라마바사 가나다라마바사 가나다라마바사가나다라 마바사 아자차카 가나다라 마바사 아자차 으라차차 가나다라마바사 가나다라마바사 가나다라마바사가나다라 마바사 아자차카 가나다라 마바사 아자차 으라차차 가나다라마바사 가나다라마바사 가나다라마바사",
+      "voteItem1": "박찬우",
+      "voteItem2": "이호찬",
+      "item1stat": 23,
+      "item2stat": 24,
       "createdAt": "2022.02.23 10:52",
       "voteCount": 43
     },
@@ -18,24 +35,49 @@
       "id": 3,
       "title": "json-server vs mock-server",
       "content": "가나다라 마바사 아자차카 가나다라 마바사 아자차 으라차차",
-      "createdAt": "2022.02.23 09:52",
-      "voteCount": 105
+      "voteItem1": "박찬우",
+      "voteItem2": "이호찬",
+      "item1stat": 23,
+      "item2stat": 24,
+      "createdAt": "2022.02.23 09:52"
     },
     {
       "id": 4,
       "title": "바다 vs 산",
       "content": "가나다라 마바사 아자차카 가나다라 마바사 아자차 으라차차",
       "createdAt": "2022.02.22 13:52",
-      "voteCount": 422
+      "voteItem1": "박찬우",
+      "voteItem2": "이호찬",
+      "item1stat": 23,
+      "item2stat": 24
     },
     {
       "id": 5,
       "title": "바다 vs 산",
       "content": "가나다라 마바사 아자차카 가나다라 마바사 아자차 으라차차",
       "createdAt": "2022.02.21 13:52",
-      "voteCount": 422
+      "voteItem1": "박찬우",
+      "voteItem2": "이호찬",
+      "item1stat": 23,
+      "item2stat": 24
     }
   ],
-  "comments": [{ "id": 1, "body": "some comment", "postId": 1 }],
+  "comments": [
+    {
+      "id": 1,
+      "content": "이거참 멋지군요",
+      "createdAt": "2022-03-20 12:20"
+    },
+    {
+      "id": 2,
+      "content": "이거참 멋지군요",
+      "createdAt": "2022-03-20 12:10"
+    },
+    {
+      "id": 3,
+      "content": "이거참 멋지군요",
+      "createdAt": "2022-03-20 12:00"
+    }
+  ],
   "profile": { "name": "typicode" }
 }

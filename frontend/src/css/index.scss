@@ -3,6 +3,12 @@
 
 $BASE_FONT_SIZE: calc(10px + 2vmin);
 
+$BACKGROUND_IMG: "https://www.queen.co.kr/news/photo/201910/320536_59033_3350.jpg";
+
+.article {
+    background: no-repeat url($BACKGROUND_IMG) 0 / cover;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',

@@ -33,7 +33,7 @@ public class ErrorController {
     }
 
     @ExceptionHandler(DuplicateVoteException.class)
-    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<BaseResult> duplicateVoteException() {
         return ResponseEntity.ok(responseService.getFailBaseResult("이미 투표했습니다."));
     }
