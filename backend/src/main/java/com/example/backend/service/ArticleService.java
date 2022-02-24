@@ -1,5 +1,7 @@
 package com.example.backend.service;
 
+import com.example.backend.controller.error.exception.article.NoArticleException;
+import com.example.backend.controller.error.exception.articlecategory.NoArticleCategoryException;
 import com.example.backend.domain.Article;
 import com.example.backend.domain.ArticleCategory;
 import com.example.backend.dto.ArticlePostRequest;
@@ -31,10 +33,10 @@ public class ArticleService {
 
     public List<Article> getArticles(Long offset, String sort, String categoryName, String search) {
         if (Objects.isNull(offset)) {
-            // TODO: 에러 처리
+            //TODO offset null 처리 따로 하기
         }
 
-        Article article = articleRepository.findById(offset).orElseThrow();
+        Article article = articleRepository.findById(offset).orElseThrow(NoArticleException::new);
 
         if (Objects.isNull(sort) && Objects.isNull(categoryName) && Objects.isNull(search)) {
             return articleRepository.findPerPageBeforeOrderByCreatedAt(article.getCreatedAt(), PAGE_SIZE);
@@ -45,7 +47,7 @@ public class ArticleService {
         }
 
         if (Objects.isNull(sort) && Objects.isNull(search)) {
-            ArticleCategory articleCategory = articleCategoryRepository.findByName(categoryName).orElseThrow();
+            ArticleCategory articleCategory = articleCategoryRepository.findByName(categoryName).orElseThrow(NoArticleCategoryException::new);
             return articleRepository.findPerPageBeforeByCategoryOrderByCreatedAt(article.getCreatedAt(),
                 articleCategory.getId(), PAGE_SIZE);
         }

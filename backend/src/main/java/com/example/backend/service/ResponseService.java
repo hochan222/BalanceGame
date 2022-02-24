@@ -11,12 +11,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class ResponseService {
 
-    public BaseResult getSuccessBaseResult() {
-        BaseResult baseResult = new BaseResult();
-        setSuccessStatus(baseResult);
-        return baseResult;
-    }
-
     public <T> SingleResult<T> getSingleResult(T data) {
         SingleResult<T> singleResult = new SingleResult<>();
         singleResult.setData(data);
@@ -31,10 +25,28 @@ public class ResponseService {
         return listResult;
     }
 
+    public BaseResult getSuccessBaseResult() {
+        BaseResult baseResult = new BaseResult();
+        setSuccessStatus(baseResult);
+        return baseResult;
+    }
+
+    public BaseResult getFailBaseResult(String message) {
+        BaseResult baseResult = new BaseResult();
+        setFailStatus(baseResult, message);
+        return baseResult;
+    }
+
     private void setSuccessStatus(BaseResult baseResult) {
         baseResult.setSuccess(true);
         baseResult.setCode(CommonResponse.SUCCESS.getCode());
         baseResult.setMessage(CommonResponse.SUCCESS.getMessage());
+    }
+
+    private void setFailStatus(BaseResult baseResult, String message) {
+        baseResult.setSuccess(false);
+        baseResult.setCode(CommonResponse.FAIL.getCode());
+        baseResult.setMessage(message);
     }
 
     @Getter
