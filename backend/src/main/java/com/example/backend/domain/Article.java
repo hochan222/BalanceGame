@@ -70,4 +70,19 @@ public class Article extends BaseTimeEntity {
         this.totalCount = 0L;
         this.password = password;
     }
+
+    public void updateArticle(String title, String content, ArticleCategory articleCategory) {
+        this.title = title;
+        this.content = content;
+        this.articleCategory = articleCategory;
+    }
+
+    public void updateVoteCount(String select) {
+        if("left".equals(select)) {
+            this.leftCount++;
+        } else if("right".equals(select)) {
+            this.rightCount++;
+        }
+        this.totalCount++;
+    }
 }

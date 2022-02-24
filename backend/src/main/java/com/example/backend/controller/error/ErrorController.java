@@ -2,6 +2,7 @@ package com.example.backend.controller.error;
 
 import com.example.backend.controller.error.exception.article.NoArticleException;
 import com.example.backend.controller.error.exception.articlecategory.NoArticleCategoryException;
+import com.example.backend.controller.error.exception.votehistory.DuplicateVoteException;
 import com.example.backend.dto.BaseResult;
 import com.example.backend.service.ResponseService;
 import lombok.RequiredArgsConstructor;
@@ -17,12 +18,6 @@ public class ErrorController {
 
     private final ResponseService responseService;
 
-    @ExceptionHandler(RuntimeException.class)
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<BaseResult> handleUnexpectedException() {
-        return ResponseEntity.ok(responseService.getFailBaseResult("unexpected error"));
-    }
-
     @ExceptionHandler(NoArticleException.class)
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<BaseResult> handleNoArticleException() {
@@ -33,5 +28,11 @@ public class ErrorController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<BaseResult> handleNoArticleCommentException() {
         return ResponseEntity.ok(responseService.getFailBaseResult("없는 게시글 카테고리입니다."));
+    }
+
+    @ExceptionHandler(DuplicateVoteException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ResponseEntity<BaseResult> duplicateVoteException() {
+        return ResponseEntity.ok(responseService.getFailBaseResult("이미 투표했습니다."));
     }
 }

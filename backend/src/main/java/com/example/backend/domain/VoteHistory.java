@@ -19,13 +19,15 @@ public class VoteHistory extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 8, nullable = false)
-    private String password;
-
     @Column(length = 300, nullable = false)
     private String userId;
 
     @ManyToOne
     @JoinColumn(name = "article_id")
     private Article article;
+
+    public VoteHistory(String userId, Article article) {
+        this.userId = userId;
+        this.article = article;
+    }
 }

@@ -11,6 +11,12 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
 
     @Query(nativeQuery = true,
         value = "select * from article a "
+            + "order by a.created_at desc "
+            + "limit :pageSize")
+    List<Article> findAllByPageSize(@Param("pageSize") int pageSize);
+
+    @Query(nativeQuery = true,
+        value = "select * from article a "
             + "where a.created_at < :createdAt "
             + "order by a.created_at desc "
             + "limit :pageSize")
