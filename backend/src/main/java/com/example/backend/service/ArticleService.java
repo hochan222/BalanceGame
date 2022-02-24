@@ -39,8 +39,42 @@ public class ArticleService {
     }
 
     public List<Article> getArticles(Long offset, String sort, String categoryName, String search) {
+
         if (offset == null) {
-            return articleRepository.findAllByPageSize(PAGE_SIZE);
+            if (Objects.isNull(sort) && Objects.isNull(categoryName) && Objects.isNull(search)) {
+                return articleRepository.findFirstPageByPageSize(PAGE_SIZE);
+            }
+            if (Objects.isNull(categoryName) && Objects.isNull(search)) {
+                return articleRepository.findFirstPageByPageSizeOrderByTotalCount(PAGE_SIZE);
+            }
+
+            if (Objects.isNull(sort) && Objects.isNull(search)) {
+                ArticleCategory articleCategory = articleCategoryRepository.findByName(categoryName)
+                    .orElseThrow(NoArticleCategoryException::new);
+                return articleRepository.findFirstPageBeforeByCategoryOrder(articleCategory.getId(), PAGE_SIZE);
+            }
+
+            if (Objects.isNull(sort) && Objects.isNull(categoryName)) {
+                return articleRepository.findFirstPageBeforeBySearchOrderByCreatedAt(PAGE_SIZE, "%" + search + "%");
+            }
+
+            if (Objects.isNull(search)) {
+                ArticleCategory articleCategory = articleCategoryRepository.findByName(categoryName).orElseThrow();
+                return articleRepository.findFirstPageBeforeByCategoryOrderByTotalCount(articleCategory.getId(),
+                    PAGE_SIZE);
+            }
+
+            if (Objects.isNull(categoryName)) {
+                return articleRepository.findFirstPageBeforeBySearchOrderByTotalCount(
+                    "%" + search + "%", PAGE_SIZE);
+            }
+
+            if (Objects.isNull(sort)) {
+                ArticleCategory articleCategory = articleCategoryRepository.findByName(categoryName).orElseThrow();
+                return articleRepository.findFirstPageBeforeByCategoryBySearch(articleCategory.getId(),
+                    "%" + search + "%", PAGE_SIZE);
+            }
+
         }
 
         Article article = articleRepository.findById(offset).orElseThrow(NoArticleException::new);
