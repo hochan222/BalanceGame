@@ -1,9 +1,11 @@
 package com.example.backend.dto;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
 import lombok.Setter;
 
 @Setter
+@Getter
 public class BaseResult {
 
     @ApiModelProperty(value = "성공여부", dataType = "Boolean", required = true, example = "true")

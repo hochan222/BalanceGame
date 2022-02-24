@@ -57,4 +57,17 @@ public class Article extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
     private Set<VoteHistory> voteHistories = new HashSet<>();
+
+    public Article(ArticleCategory articleCategory, String title, String content,
+        String leftItem, String rightItem, String password) {
+        this.articleCategory = articleCategory;
+        this.title = title;
+        this.content = content;
+        this.leftItem = leftItem;
+        this.rightItem = rightItem;
+        this.leftCount = 0L;
+        this.rightCount = 0L;
+        this.totalCount = 0L;
+        this.password = password;
+    }
 }
