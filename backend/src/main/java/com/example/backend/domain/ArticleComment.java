@@ -29,4 +29,13 @@ public class ArticleComment extends BaseTimeEntity {
     @Column(columnDefinition = "TINYTEXT", nullable = false)
     private String content;
 
+    public ArticleComment(Article article, String password, String content) {
+        this.article = article;
+        this.password = password;
+        this.content = content;
+    }
+
+    public void updateArticleComment(String content) {
+        this.content = content;
+    }
 }

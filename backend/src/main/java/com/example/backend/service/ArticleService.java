@@ -1,11 +1,13 @@
 package com.example.backend.service;
 
+import com.example.backend.controller.error.exception.UnauthorizedException;
 import com.example.backend.controller.error.exception.article.NoArticleException;
 import com.example.backend.controller.error.exception.articlecategory.NoArticleCategoryException;
 import com.example.backend.controller.error.exception.votehistory.DuplicateVoteException;
 import com.example.backend.domain.Article;
 import com.example.backend.domain.ArticleCategory;
 import com.example.backend.domain.VoteHistory;
+import com.example.backend.dto.ArticlePasswordPostRequest;
 import com.example.backend.dto.ArticlePatchRequest;
 import com.example.backend.dto.ArticlePostRequest;
 import com.example.backend.repository.ArticleCategoryRepository;
@@ -37,8 +39,7 @@ public class ArticleService {
     }
 
     public List<Article> getArticles(Long offset, String sort, String categoryName, String search) {
-
-        if(offset == null) {
+        if (offset == null) {
             return articleRepository.findAllByPageSize(PAGE_SIZE);
         }
 
@@ -53,7 +54,8 @@ public class ArticleService {
         }
 
         if (Objects.isNull(sort) && Objects.isNull(search)) {
-            ArticleCategory articleCategory = articleCategoryRepository.findByName(categoryName).orElseThrow(NoArticleCategoryException::new);
+            ArticleCategory articleCategory = articleCategoryRepository.findByName(categoryName)
+                .orElseThrow(NoArticleCategoryException::new);
             return articleRepository.findPerPageBeforeByCategoryOrderByCreatedAt(article.getCreatedAt(),
                 articleCategory.getId(), PAGE_SIZE);
         }
@@ -86,14 +88,14 @@ public class ArticleService {
     }
 
     public Article getArticle(Long articleId) {
-        //TODO error 처리 ?
+        //TODO: error 처리 ?
         return articleRepository.findById(articleId).orElseThrow();
     }
 
     @Transactional
     public void addCount(Long articleId, String selectedVote, String userId) {
         Article article = articleRepository.findById(articleId).orElseThrow();
-        if(voteHistoryRepository.findByUserId(userId).isPresent()) {
+        if (voteHistoryRepository.findByUserId(userId).isPresent()) {
             throw new DuplicateVoteException();
         }
         VoteHistory voteHistory = new VoteHistory(userId, article);
@@ -104,7 +106,8 @@ public class ArticleService {
     @Transactional
     public void updateArticle(Long articleId, ArticlePatchRequest articlePatchRequest) {
         Article article = articleRepository.findById(articleId).orElseThrow(NoArticleException::new);
-        ArticleCategory articleCategory = articleCategoryRepository.findByName(articlePatchRequest.getCategoryName()).orElseThrow(NoArticleCategoryException::new);
+        ArticleCategory articleCategory = articleCategoryRepository.findByName(articlePatchRequest.getCategoryName())
+            .orElseThrow(NoArticleCategoryException::new);
         article.updateArticle(articlePatchRequest.getTitle(), articlePatchRequest.getContent(), articleCategory);
     }
 
@@ -112,5 +115,12 @@ public class ArticleService {
     public void deleteArticle(Long articleId) {
         Article article = articleRepository.findById(articleId).orElseThrow(NoArticleException::new);
         articleRepository.delete(article);
+    }
+
+    public void matchArticlePassword(Long articleId, ArticlePasswordPostRequest articlePasswordPostRequest) {
+        Article article = articleRepository.findById(articleId).orElseThrow(NoArticleException::new);
+        if (!articlePasswordPostRequest.getPassword().equals(article.getPassword())) {
+            throw new UnauthorizedException();
+        }
     }
 }

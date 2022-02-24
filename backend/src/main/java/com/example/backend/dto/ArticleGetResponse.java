@@ -18,6 +18,8 @@ public class ArticleGetResponse {
     private ArticleCategoryDto articleCategoryDto;
     @ApiModelProperty(value = "게시글 제목", dataType = "String", required = true, example = "제목")
     private String title;
+    @ApiModelProperty(value = "게시글 내용", dataType = "String", required = true, example = "내용")
+    private String content;
     @ApiModelProperty(value = "게시글 전체 투표수", dataType = "Long", required = true, example = "10")
     private Long totalCount;
     @ApiModelProperty(value = "게시글 등록일자", dataType = "String", required = true, example = "2022.02.22 14:30")
@@ -25,11 +27,12 @@ public class ArticleGetResponse {
     @ApiModelProperty(value = "게시글 수정일자", dataType = "String", required = true, example = "2022.02.27 12:20")
     private String modifiedAt;
 
-    public ArticleGetResponse(Long id, ArticleCategoryDto articleCategoryDto, String title, Long totalCount, String createdAt,
+    public ArticleGetResponse(Long id, ArticleCategoryDto articleCategoryDto, String title, String content, Long totalCount, String createdAt,
         String modifiedAt) {
         this.id = id;
         this.articleCategoryDto = articleCategoryDto;
         this.title = title;
+        this.content = content;
         this.totalCount = totalCount;
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
@@ -39,6 +42,6 @@ public class ArticleGetResponse {
         String createdAt = article.getCreatedAt().format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
         String modifiedAt = article.getModifiedAt().format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
         return new ArticleGetResponse(article.getId(), new ArticleCategoryDto(article.getArticleCategory()),
-            article.getTitle(), article.getTotalCount(), createdAt, modifiedAt);
+            article.getTitle(), article.getContent(), article.getTotalCount(), createdAt, modifiedAt);
     }
 }
