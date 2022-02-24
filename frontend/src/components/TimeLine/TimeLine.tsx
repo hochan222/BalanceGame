@@ -18,12 +18,12 @@ const TimeLine = ({ uiStore, store }: ITimeLineProps) => {
   const { days, timeLine: history } = timeLine;
 
   const onClickReadMore = async () => {
-    const response = await api.get(`/articles?offset=${lastOffset}`);
+    const response = await api.get(`/articles?offset=${lastOffset || 1}`);
 
     setTimeLines(response.data.data);
     const dataLength = response.data.data.length;
     const articleLength = response.data.data.length - 1;
-    setLastOffset(response?.data?.data[articleLength]?.id || undefined);
+    setLastOffset(response?.data?.data[articleLength]?.id || 0);
     if (dataLength === 0) {
       setIsArticleReadMoreEnd(true);
     }

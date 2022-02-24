@@ -26,6 +26,7 @@ class UIStore {
       setSelectedCategory: action.bound,
       selectArticle: action.bound,
       isArticleReadMoreEnd: observable,
+      setIsArticleReadMoreEnd: action.bound,
     });
     this.rootStore = rootStore;
   }
@@ -42,8 +43,8 @@ class UIStore {
     this.categories = categories;
   }
 
-  selectArticle(articleId: number){
-    this.selectedArticleId = articleId; 
+  selectArticle(articleId: number) {
+    this.selectedArticleId = articleId;
   }
 
   setIsArticleReadMoreEnd(isArticleReadMoreEnd: boolean) {
