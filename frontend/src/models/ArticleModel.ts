@@ -9,6 +9,10 @@ export interface IArticleData {
   content: string;
   createdAt: string;
   voteCount: number;
+  articleCategoryDto: {
+    id: number;
+    name: string;
+  };
 }
 
 class ArticleModel {
@@ -24,9 +28,21 @@ class ArticleModel {
 
   voteCount = 0;
 
-  constructor(store: HomeStore, data: IArticleData) {
+  articleCategoryDto = {
+    id: 0,
+    name: '',
+  };
+
+  constructor(store: HomeStore | SearchResultStore, data: any) {
     makeObservable(this, {});
-    extendObservable(this, data);
+    extendObservable(this, {
+      id: data?.id || this.id,
+      title: data?.title || this.title,
+      content: data?.content || this.content,
+      createdAt: data?.createdAt || this.createdAt,
+      voteCount: data?.totalCount || this.voteCount,
+      articleCategoryDto: data?.articleCategoryDto || this.articleCategoryDto,
+    });
     this.store = store;
   }
 }

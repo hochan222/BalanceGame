@@ -5,6 +5,7 @@ import StoreContext from '@/contexts/Store';
 import RootStore from '@/stores/RootStore';
 import TimeLine from '@/components/TimeLine';
 import Spinner from '@/components/Spinner';
+import SearchNotFound from '@/components/SearchNotFound';
 
 interface ISearchResultCollectionProps {}
 
@@ -13,7 +14,11 @@ const SearchResultCollection = () => {
   const { searchResultStore: store } = rootStore;
   const { timeLine } = store;
 
-  const content = !rootStore.isLoading && timeLine.days.length > 0 ? <TimeLine timeLine={timeLine} /> : <Spinner />;
+  if (rootStore.isLoading) {
+    return <Spinner />
+  }
+
+  const content = !rootStore.isLoading && timeLine.days.length > 0 ? <TimeLine timeLine={timeLine} /> : <SearchNotFound />;
 
   return content;
 };

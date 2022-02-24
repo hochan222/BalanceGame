@@ -7,7 +7,7 @@ class UIStore {
 
   isHomeSearchDropDownActive = false;
 
-  categories = ['전체 보기', '백엔드', '프런트엔드'];
+  categories = ['전체 검색', '백엔드', '프론트엔드', '데이터분석', 'AI', 'Job담'];
 
   selectedCategory = '전체 보기';
 

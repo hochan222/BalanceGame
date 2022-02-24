@@ -1,7 +1,7 @@
 import { action, flow, makeObservable, observable } from 'mobx';
 import dayjs from 'dayjs';
 
-import ArticleModel, { IArticleData } from '@/models/ArticleModel';
+import ArticleModel from '@/models/ArticleModel';
 import SearchResultRepository from '@/repositories/SearchResultRepository';
 
 import RootStore from './RootStore';
@@ -16,6 +16,15 @@ class SearchResultStore {
   public articles: ArticleModel[] = [];
 
   public timeLine: { days: string[]; timeLine: {} } = { days: [], timeLine: {} };
+
+  private categoryMatch = {
+    '백엔드': 'BackEnd',
+    '프론트엔드': 'FrontEnd',
+    '데이터분석': 'DataAnaylsis',
+    'AI': 'AI',
+    'Job담':'Job담',
+    '전체 검색' : ''
+  }
 
   constructor(rootStore: RootStore) {
     makeObservable(this, {
@@ -34,8 +43,8 @@ class SearchResultStore {
     this.isLoading = isLoading;
   }
 
-  setArticles(articles: ArticleModel[]) {
-    this.articles = articles.map((article: IArticleData) => new ArticleModel(this, article));
+  setArticles(articles: any[]) {
+    this.articles = articles.map((article: any) => new ArticleModel(this, article));
   }
 
   setSearchKeyword(searchKeyword: string) {
@@ -46,13 +55,13 @@ class SearchResultStore {
     this.setIsLoading(true);
     this.reset({ keyword, category });
 
-    const { selectedCategory } = this.rootStore.uiStore;
+    const categoryResult = this.categoryMatch[category];
 
     try {
-      const data = await SearchResultRepository.getArticle(
-        `searchKeyword=${this.searchKeyword}&category=${selectedCategory}`,
+      const response = await SearchResultRepository.getArticle(
+        `searchKeyword=${this.searchKeyword}&category=${categoryResult}&offset=6`,
       );
-      this.setArticles(data[0].data);
+      this.setArticles(response[0].data.data);
       this.timeLine = this.groupByDay(this.articles);
     } catch (e) {
       // TODO: handle error

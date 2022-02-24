@@ -2,7 +2,7 @@ import { action, flow, makeObservable, observable } from 'mobx';
 
 import dayjs from 'dayjs';
 import RootStore from '@/stores/RootStore';
-import ArticleModel, { IArticleData } from '@/models/ArticleModel';
+import ArticleModel from '@/models/ArticleModel';
 import HomeRepository from '@/repositories/HomeRepository';
 
 class HomeStore {
@@ -29,8 +29,8 @@ class HomeStore {
     this.isLoading = isLoading;
   }
 
-  setArticles(articles: ArticleModel[]) {
-    this.articles = articles.map((article: IArticleData) => new ArticleModel(this, article));
+  setArticles(articles: any[]) {
+    this.articles = articles.map((article: any) => new ArticleModel(this, article));
   }
 
   async fetchArticles() {
@@ -38,8 +38,8 @@ class HomeStore {
     this.reset();
 
     try {
-      const data = await HomeRepository.getArticle();
-      this.setArticles(data[0].data);
+      const response = await HomeRepository.getArticle();
+      this.setArticles(response[0].data.data);
       this.timeLine = this.groupByDay(this.articles);
     } catch (e) {
       // TODO: handle error

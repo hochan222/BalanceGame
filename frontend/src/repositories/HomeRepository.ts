@@ -10,8 +10,8 @@ class HomeRepository {
   }
 
   async getArticle() {
-    const currentTime = new Date().getTime();
-    return Promise.all([API.get(`${this.URL}?_=${currentTime}`), wait(SPINNER_API_WAITING_TIME)]);
+    // const currentTime = new Date().getTime();
+    return Promise.all([API.get(`${this.URL}?offset=6`), wait(SPINNER_API_WAITING_TIME)]);
   }
 }
 
