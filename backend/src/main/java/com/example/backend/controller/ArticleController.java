@@ -72,7 +72,7 @@ public class ArticleController {
 
     @ApiOperation(value = "게시글 단건조회", notes = "조건에 맞는 게시글 단건을 반환한다.")
     @GetMapping("/{articleId}")
-    public ResponseEntity<SingleResult<ArticleDetailGetResponse>> getArticle(@RequestParam Long articleId) {
+    public ResponseEntity<SingleResult<ArticleDetailGetResponse>> getArticle(@PathVariable Long articleId) {
 
         Article article = articleService.getArticle(articleId);
         List<ArticleComment> articles = articleCommentService.getArticles(articleId);

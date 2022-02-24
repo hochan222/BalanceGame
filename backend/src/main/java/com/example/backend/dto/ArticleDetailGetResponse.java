@@ -35,7 +35,7 @@ public class ArticleDetailGetResponse {
     @ApiModelProperty(value = "게시글 수정일자", dataType = "String", required = true, example = "2022.02.27 12:20")
     private String modifiedAt;
     @ApiModelProperty(value = "댓글 목록", dataType = "String", required = true, example = "2022.02.27 12:20")
-    private List<ArticleCommentDto> articleCategoryDtos;
+    private List<ArticleCommentDto> articleCommentDtos;
 
 
     public ArticleDetailGetResponse(Long id, ArticleCategoryDto articleCategoryDto, String title, String content,
@@ -50,7 +50,7 @@ public class ArticleDetailGetResponse {
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
         this.articleCategoryDto = articleCategoryDto;
-        this.articleCategoryDtos = articleCommentDtos;
+        this.articleCommentDtos = articleCommentDtos;
     }
 
     public static ArticleDetailGetResponse of(Article article, List<ArticleComment> articleComments) {
