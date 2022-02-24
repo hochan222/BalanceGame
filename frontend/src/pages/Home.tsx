@@ -36,9 +36,8 @@ const Home = () => {
           <Logo />
           <Title text="Balance Game" />
         </Header>
-
+        
         <HomeCollection />
-
         <Footer />
       </Blur>
     </Section>

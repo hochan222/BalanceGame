@@ -7,6 +7,7 @@ import Search from '@/components/Search';
 import TimeLine from '@/components/TimeLine';
 import BalanceGame from '@/components/BalanceGame';
 import Spinner from '@/components/Spinner';
+import EditButton from '@/components/EditButton';
 
 interface IHomeCollectionProps {}
 
@@ -16,7 +17,7 @@ const HomeCollection = () => {
   const { timeLine } = store;
 
   const content =
-    !rootStore.isLoading && timeLine.days.length > 0 ? <TimeLine store={store} uiStore={uiStore} /> : <Spinner />;
+    !rootStore.isLoading && timeLine.days.length > 0 ? <><EditButton/> <TimeLine store={store} uiStore={uiStore} /></> : <Spinner />;
 
   return (
     <>
