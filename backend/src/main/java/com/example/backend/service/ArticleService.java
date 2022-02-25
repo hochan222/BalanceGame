@@ -38,38 +38,42 @@ public class ArticleService {
         articleRepository.save(article);
     }
 
+    public boolean isNullOrBlankOrEmpty(String value) {
+        return Objects.isNull(value) || value.isBlank() || value.isEmpty();
+    }
+
     public List<Article> getArticles(Long offset, String sort, String categoryName, String search) {
 
         if (offset == null) {
-            if (Objects.isNull(sort) && Objects.isNull(categoryName) && Objects.isNull(search)) {
+            if (isNullOrBlankOrEmpty(sort) && isNullOrBlankOrEmpty(categoryName) && isNullOrBlankOrEmpty(search)) {
                 return articleRepository.findFirstPageByPageSize(PAGE_SIZE);
             }
-            if (Objects.isNull(categoryName) && Objects.isNull(search)) {
+            if (isNullOrBlankOrEmpty(categoryName) && isNullOrBlankOrEmpty(search)) {
                 return articleRepository.findFirstPageByPageSizeOrderByTotalCount(PAGE_SIZE);
             }
 
-            if (Objects.isNull(sort) && Objects.isNull(search)) {
+            if (isNullOrBlankOrEmpty(sort) && isNullOrBlankOrEmpty(search)) {
                 ArticleCategory articleCategory = articleCategoryRepository.findByName(categoryName)
                     .orElseThrow(NoArticleCategoryException::new);
                 return articleRepository.findFirstPageBeforeByCategoryOrder(articleCategory.getId(), PAGE_SIZE);
             }
 
-            if (Objects.isNull(sort) && Objects.isNull(categoryName)) {
+            if (isNullOrBlankOrEmpty(sort) && isNullOrBlankOrEmpty(categoryName)) {
                 return articleRepository.findFirstPageBeforeBySearchOrderByCreatedAt(PAGE_SIZE, "%" + search + "%");
             }
 
-            if (Objects.isNull(search)) {
+            if (isNullOrBlankOrEmpty(search)) {
                 ArticleCategory articleCategory = articleCategoryRepository.findByName(categoryName).orElseThrow();
                 return articleRepository.findFirstPageBeforeByCategoryOrderByTotalCount(articleCategory.getId(),
                     PAGE_SIZE);
             }
 
-            if (Objects.isNull(categoryName)) {
+            if (isNullOrBlankOrEmpty(categoryName)) {
                 return articleRepository.findFirstPageBeforeBySearchOrderByTotalCount(
                     "%" + search + "%", PAGE_SIZE);
             }
 
-            if (Objects.isNull(sort)) {
+            if (isNullOrBlankOrEmpty(sort)) {
                 ArticleCategory articleCategory = articleCategoryRepository.findByName(categoryName).orElseThrow();
                 return articleRepository.findFirstPageBeforeByCategoryBySearch(articleCategory.getId(),
                     "%" + search + "%", PAGE_SIZE);
@@ -79,38 +83,38 @@ public class ArticleService {
 
         Article article = articleRepository.findById(offset).orElseThrow(NoArticleException::new);
 
-        if (Objects.isNull(sort) && Objects.isNull(categoryName) && Objects.isNull(search)) {
+        if (isNullOrBlankOrEmpty(sort) && isNullOrBlankOrEmpty(categoryName) && isNullOrBlankOrEmpty(search)) {
             return articleRepository.findPerPageBeforeOrderByCreatedAt(article.getCreatedAt(), PAGE_SIZE);
         }
 
-        if (Objects.isNull(categoryName) && Objects.isNull(search)) {
+        if (isNullOrBlankOrEmpty(categoryName) &&isNullOrBlankOrEmpty(search)) {
             return articleRepository.findPerPageBeforeOrderByTotalCount(article.getCreatedAt(), PAGE_SIZE);
         }
 
-        if (Objects.isNull(sort) && Objects.isNull(search)) {
+        if (isNullOrBlankOrEmpty(sort) && isNullOrBlankOrEmpty(search)) {
             ArticleCategory articleCategory = articleCategoryRepository.findByName(categoryName)
                 .orElseThrow(NoArticleCategoryException::new);
             return articleRepository.findPerPageBeforeByCategoryOrderByCreatedAt(article.getCreatedAt(),
                 articleCategory.getId(), PAGE_SIZE);
         }
 
-        if (Objects.isNull(sort) && Objects.isNull(categoryName)) {
+        if (isNullOrBlankOrEmpty(sort) && isNullOrBlankOrEmpty(categoryName)) {
             return articleRepository.findPerPageBeforeBySearchOrderByCreatedAt(article.getCreatedAt(),
                 "%" + search + "%", PAGE_SIZE);
         }
 
-        if (Objects.isNull(search)) {
+        if (isNullOrBlankOrEmpty(search)) {
             ArticleCategory articleCategory = articleCategoryRepository.findByName(categoryName).orElseThrow();
             return articleRepository.findPerPageBeforeByCategoryOrderByTotalCount(article.getCreatedAt(),
                 articleCategory.getId(), PAGE_SIZE);
         }
 
-        if (Objects.isNull(categoryName)) {
+        if (isNullOrBlankOrEmpty(categoryName)) {
             return articleRepository.findPerPageBeforeBySearchOrderByTotalCount(article.getCreatedAt(),
                 "%" + search + "%", PAGE_SIZE);
         }
 
-        if (Objects.isNull(sort)) {
+        if (isNullOrBlankOrEmpty(sort)) {
             ArticleCategory articleCategory = articleCategoryRepository.findByName(categoryName).orElseThrow();
             return articleRepository.findPerPageBeforeByCategoryBySearchOrderByCreatedAt(article.getCreatedAt(),
                 articleCategory.getId(), "%" + search + "%", PAGE_SIZE);
