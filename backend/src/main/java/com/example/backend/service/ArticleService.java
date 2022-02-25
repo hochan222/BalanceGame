@@ -133,12 +133,13 @@ public class ArticleService {
     @Transactional
     public void addCount(Long articleId, String selectedVote, String userId) {
         Article article = articleRepository.findById(articleId).orElseThrow();
-        if (voteHistoryRepository.findByUserId(userId).isPresent()) {
+        if (voteHistoryRepository.findByUserIdAAndArticle(userId, article).isPresent()) {
             throw new DuplicateVoteException();
         }
         VoteHistory voteHistory = new VoteHistory(userId, article);
         voteHistoryRepository.save(voteHistory);
         article.updateVoteCount(selectedVote);
+        articleRepository.save(article);
     }
 
     @Transactional
