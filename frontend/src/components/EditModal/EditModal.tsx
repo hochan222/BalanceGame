@@ -72,6 +72,11 @@ export const EditModal = ({ onClose, isOpen }: UseDisclosureProps) => {
     postArticle(data);
   };
 
+  const onClickRegister = () => {
+    modalClose();
+    document.location.reload();
+  };
+
   return (
     <Modal onClose={modalClose} isOpen={isOpen || false} size="xl">
       <ModalOverlay />
@@ -91,7 +96,7 @@ export const EditModal = ({ onClose, isOpen }: UseDisclosureProps) => {
               </Grid>
               <EditorCategoriesSection formState={formState} clearErrors={clearErrors} setValue={setValue} />
               <EditorPasswordSection formState={formState} clearErrors={clearErrors} setValue={setValue} />
-              <Button colorScheme="twitter" marginBottom={3} type="submit">
+              <Button colorScheme="twitter" marginBottom={3} type="submit" onClick={onClickRegister}>
                 등록하기
               </Button>
             </Grid>

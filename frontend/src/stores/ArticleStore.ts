@@ -13,23 +13,23 @@ class AriticleStore {
   public comments: CommentModel[] = [];
 
   public article: ArticleModel = {
-    "store": this,
-    "id": 1,
-    "title": "",
-    "leftItem": "",
-    "rightItem": "",
-    "leftCount": 0,
-    "rightCount": 0,
-    "content": "",
-    "createdAt": "",
-    "voteCount": 0,
-    "articleCommentDtos": [],
-    "articleCategoryDto": {
-      "id": 1,
-      "name": "BackEnd"
-    }
+    store: this,
+    id: 1,
+    title: '',
+    leftItem: '',
+    rightItem: '',
+    leftCount: 0,
+    rightCount: 0,
+    content: '',
+    createdAt: '',
+    voteCount: 0,
+    articleCommentDtos: [],
+    articleCategoryDto: {
+      id: 1,
+      name: 'BackEnd',
+    },
   };
-  
+
   constructor(rootStore: RootStore) {
     makeObservable(this, {
       comments: observable,
@@ -47,7 +47,7 @@ class AriticleStore {
 
   setComments(articleData: ArticleModel) {
     const { articleCommentDtos } = articleData;
-    this.comments = articleCommentDtos.map((comment: ICommentData)=> new CommentModel(this, comment));
+    this.comments = articleCommentDtos.map((comment: ICommentData) => new CommentModel(this, comment));
   }
 
   setArticle(article: ArticleModel) {
@@ -62,7 +62,7 @@ class AriticleStore {
     this.setIsLoading(true);
 
     try {
-      const { data : articleData } = yield ArticleRepository.getArticle(this.rootStore.uiStore.selectedArticleId);
+      const { data: articleData } = yield ArticleRepository.getArticle(this.rootStore.uiStore.selectedArticleId);
       // 배열형태
       this.setArticle(articleData.data);
       this.setComments(articleData.data);
@@ -106,7 +106,6 @@ class AriticleStore {
 
     this.setIsLoading(false);
   }
-
 }
 
 export default AriticleStore;
