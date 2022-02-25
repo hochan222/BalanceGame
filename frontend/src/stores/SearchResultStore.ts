@@ -76,8 +76,9 @@ class SearchResultStore {
       const response = await SearchResultRepository.getArticle(
         `search=${this.searchKeyword}&category=${categoryResult}`,
       );
-      console.log('aa', response)
       this.setArticles(response[0].data.data);
+      const articleLength = response[0].data.data.length - 1;
+      this.setLastOffset(response[0]?.data?.data[articleLength]?.id || undefined);
       this.timeLine = this.groupByDay(this.articles);
     } catch (e) {
       // TODO: handle error

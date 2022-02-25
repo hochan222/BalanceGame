@@ -24,6 +24,7 @@ const TimeLine = ({ uiStore, store }: ITimeLineProps) => {
     const dataLength = response.data.data.length;
     const articleLength = response.data.data.length - 1;
     setLastOffset(response?.data?.data[articleLength]?.id || 0);
+    console.log(response?.data?.data[articleLength]?.id || 0);
     if (dataLength === 0) {
       setIsArticleReadMoreEnd(true);
     }
