@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-@CrossOrigin(origins="*", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class RootController implements ErrorController {
 
-    @GetMapping("/error")
+    @GetMapping({"/error", "/"})
     public String redirectRoot() {
         return "index.html";
     }

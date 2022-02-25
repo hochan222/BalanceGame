@@ -12,7 +12,7 @@ class EditRepository {
       leftItem : data.voteItem1,
       rightItem: data.voteItem2,
       articleCategoryName: data.category,
-      titie: data.title,
+      title: data.title,
       content: data.content,
       password: data.password
     }, {
